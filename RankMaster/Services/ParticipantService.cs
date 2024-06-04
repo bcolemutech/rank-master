@@ -1,7 +1,7 @@
-﻿using RankMaster.POCOs;
-using RankMaster.Services;
+﻿namespace RankMaster.Services;
 
-namespace RankMaster;
+using POCOs;
+using Spectre.Console;
 
 public class ParticipantService
 {
