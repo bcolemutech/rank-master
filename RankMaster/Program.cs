@@ -59,7 +59,7 @@ while (true)
             continue;
         case "Open Participants Screen":
             AnsiConsole.MarkupLine("Opening Participants Screen...");
-            ParticipantService.OpenParticipantsScreen(challonge, SavedData.Participants);
+            ParticipantService.OpenParticipantsScreen(challonge, savedData);
             break;
         case "Exit":
             AnsiConsole.MarkupLine("Exiting...");
