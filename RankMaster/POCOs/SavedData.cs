@@ -9,7 +9,7 @@ public class SavedData
 
     public static SavedData Instance { get; } = new();
     public List<string> TournamentIds { get; set; } = [];
-    public static IEnumerable<Participant> Participants { get; set; } = new List<Participant>();
+    public IEnumerable<Participant> Participants { get; set; } = new List<Participant>();
 
     public static SavedData Load()
     {
