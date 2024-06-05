@@ -63,15 +63,16 @@ public class ParticipantService
         {
             ctx.Status("Getting participants from Challonge...");
             ctx.Spinner(Spinner.Known.Dots);
-            
+
             // Get participants from Challonge
             var participants = new List<Participant>();
             foreach (var tournamentId in savedData.TournamentIds)
             {
                 participants.AddRange(challonge.GetParticipants(tournamentId));
             }
+
             participants = participants.GroupBy(p => p.Id).Select(g => g.First()).ToList();
-            
+
             ctx.Status("Calculating handicaps...");
             // Calculate handicaps
             foreach (var participant in participants)
@@ -80,13 +81,34 @@ public class ParticipantService
                 var losses = 0;
                 foreach (var tournamentId in savedData.TournamentIds)
                 {
-                    // TODO : finish logic for handicap calculation
-                    //var matches = challonge.GetMatches(tournamentId, participant.Id);
+                    var matches = challonge.GetMatches(tournamentId, participant.Id);
                     // get total wins and losses
-                    
+                    foreach (var match in matches)
+                    {
+                        foreach (var score in match.Attributes.PointsByParticipant)
+                        {
+                            if (score.ParticipantId.ToString() == participant.Id)
+                            {
+                                wins += score.Scores.Sum();
+                            }
+                            else
+                            {
+                                losses += score.Scores.Sum();
+                            }
+                        }
+                    }
                 }
+                participant.Wins = wins;
+                participant.Losses = losses;
+                var totalGames = wins + losses;
+                participant.Handicap = RankService.CalculateRank(totalGames, wins);
             }
 
+            savedData.Participants = participants;
+
+            ctx.Status("Saving participants...");
+            // Save participants
+            SavedData.Save(savedData);
         });
     }
 }
