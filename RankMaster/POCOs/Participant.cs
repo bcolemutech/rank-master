@@ -21,15 +21,5 @@ public class Participant
     public decimal WinPercentage => Wins + Losses == 0 ? 0 : Math.Round((decimal)Wins / (Wins + Losses) * 100, 2);
 
     [JsonPropertyName("handicap")]
-    public int Handicap { get; set; }
-}
-
-[JsonSerializable(typeof(ParticipantAttributes))]
-public class ParticipantAttributes
-{
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
-
-    [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public decimal Handicap { get; set; }
 }
