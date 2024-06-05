@@ -5,13 +5,13 @@ namespace RankMaster.Services;
 
 public class TournamentService
 {
-    public static void EditTournamentData(ChallongeClient challonge, IEnumerable<TournamentWrapper> tournaments)
+    public static void EditTournamentData(ChallongeClient challonge, IEnumerable<Tournament> tournaments)
     {
         // Get all tournaments from Challonge
         var allTournaments = challonge.GetAllTournaments();
         
         // Render MultipleChoicePrompt with all tournaments, having saved tournament checked by default
-        var prompt = new MultiSelectionPrompt<TournamentWrapper>()
+        var prompt = new MultiSelectionPrompt<Tournament>()
             .Title("Select a tournaments to include")
             .NotRequired()
             .PageSize(10)
