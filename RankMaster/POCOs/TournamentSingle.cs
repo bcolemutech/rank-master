@@ -5,5 +5,5 @@ namespace RankMaster.POCOs;
 public class TournamentSingle
 {
     [JsonPropertyName("data")]
-    public TournamentWrapper Data { get; set; }
+    public Tournament Tournament { get; set; }
 }

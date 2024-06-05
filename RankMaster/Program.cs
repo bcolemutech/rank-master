@@ -22,6 +22,7 @@ var challonge = new ChallongeClient(apiKey);
 // Main loop
 while (true)
 {
+    AnsiConsole.MarkupLine("Tournament data identified:");
     // Get saved data from saved app data
     var savedData = SavedData.Load();
     // Get tournament details for each tournament in the saved data
@@ -59,8 +60,8 @@ while (true)
             continue;
         case "Open Participants Screen":
             AnsiConsole.MarkupLine("Opening Participants Screen...");
-            ParticipantService.OpenParticipantsScreen(challonge, SavedData.Participants);
-            break;
+            ParticipantService.OpenParticipantsScreen(challonge, savedData);
+            continue;
         case "Exit":
             AnsiConsole.MarkupLine("Exiting...");
             Environment.Exit(0);

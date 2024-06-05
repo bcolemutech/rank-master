@@ -2,8 +2,8 @@
 
 namespace RankMaster.POCOs;
 
-[JsonSerializable(typeof(TournamentWrapper))]
-public class TournamentWrapper
+[JsonSerializable(typeof(Tournament))]
+public class Tournament
 {
     [JsonPropertyName("attributes")]
     public TournamentAttributes Attributes { get; set; }
